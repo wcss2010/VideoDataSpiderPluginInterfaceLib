@@ -10,7 +10,7 @@ import org.cnunixclub.spider.Interface.model.*;
  * 视频网站解析适配器
  * @author wcss
  */
-public interface IVideoSiteResolveAdapter
+public abstract class IVideoSiteResolveAdapter
 {
     /**
      * 适配器名称
@@ -42,64 +42,70 @@ public interface IVideoSiteResolveAdapter
      * @param stateCode
      * @param txt 
      */
-    public void processResolveStatus(int stateCode,String txt);
+    public void processResolveStatus(int stateCode,String txt)
+    {
+        if (this.resolveStatusEvent != null)
+        {
+            this.resolveStatusEvent.processResolveStatus(this, stateCode, txt);
+        }
+    }
     
     /**
      * 获得默认字符编码
      * @param url
      * @return 
      */
-    public String getEncoding();
+    public abstract String getEncoding();
     
     /**
      * 获得本插件支持的网站列表
      * @return 
      */
-    public String[] getSupportVideoSiteUrlList();
+    public abstract String[] getSupportVideoSiteUrlList();
     
     /**
      * 获得频道信息列表
      * @param content
      * @return 
      */
-    public VideoChannelInfo[] getChannelList(String content);
+    public abstract VideoChannelInfo[] getChannelList(String content);
     
     /**
      * 获得频道内容链接列表
      * @param content
      * @return 
      */
-    public String[] getChannelContentURLList(String content);
+    public abstract String[] getChannelContentURLList(String content);
     
     /**
      * 获得视频说明对象
      * @param content
      * @return 
      */
-    public VideoInfo getVideoInfoObj(String content);
+    public abstract VideoInfo getVideoInfoObj(String content);
     
     /**
      * 获得视频链接列表
      * @param content
      * @return 
      */
-    public String[] getVideUrlList(String content,String videoUrlType);
+    public abstract String[] getVideUrlList(String content,String videoUrlType);
     
     /**
      * 设置数据库连接字符串
      * @param dbUrl 
      */
-    public void setDBUrl(String dbUrl,String user,String pwd);
+    public abstract void setDBUrl(String dbUrl,String user,String pwd);
     
     /**
      * 初始化函数
      */
-    public void init();
+    public abstract void init();
     
     /**
      * 解析网页数据
      * @param cmd
      * @param data 
      */
-    public void resolve(String cmd,String data);    
+    public abstract void resolve(String cmd,String data);    
 }
