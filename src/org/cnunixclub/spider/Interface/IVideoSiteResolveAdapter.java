@@ -89,7 +89,7 @@ public abstract class IVideoSiteResolveAdapter
      * @param content
      * @return 
      */
-    public abstract String[] getVideUrlList(String content,String videoUrlType);
+    public abstract String[] getVideoUrlList(String content,String videoUrlType);
     
     /**
      * 设置数据库连接字符串
