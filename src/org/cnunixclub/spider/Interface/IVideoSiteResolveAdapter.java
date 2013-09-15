@@ -42,11 +42,11 @@ public abstract class IVideoSiteResolveAdapter
      * @param stateCode
      * @param txt 
      */
-    public void processResolveStatus(int stateCode,String txt)
+    public void processResolveStatus(int stateCode,Object obj)
     {
         if (this.resolveStatusEvent != null)
         {
-            this.resolveStatusEvent.processResolveStatus(this, stateCode, txt);
+            this.resolveStatusEvent.processResolveStatus(this, stateCode, obj);
         }
     }
     

@@ -10,5 +10,5 @@ package org.cnunixclub.spider.Interface;
  */
 public interface IVideoSiteResolveStatus
 {
-    public void processResolveStatus(IVideoSiteResolveAdapter sender,int stateCode,String text);    
+    public void processResolveStatus(IVideoSiteResolveAdapter sender,int stateCode,Object obj);    
 }
