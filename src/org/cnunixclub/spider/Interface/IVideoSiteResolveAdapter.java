@@ -78,6 +78,13 @@ public abstract class IVideoSiteResolveAdapter
     public abstract String[] getChannelContentURLList(String content);
     
     /**
+     * 获取下一页的链接地址
+     * @param content
+     * @return 
+     */
+    public abstract String getNextPageUrl(String content);
+    
+    /**
      * 获得视频说明对象
      * @param content
      * @return 
@@ -107,5 +114,5 @@ public abstract class IVideoSiteResolveAdapter
      * @param cmd
      * @param data 
      */
-    public abstract void resolve(String cmd,String data);    
+    public abstract Object resolve(String cmd,Object data);    
 }
