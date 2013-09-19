@@ -4,7 +4,7 @@
  */
 package org.cnunixclub.spider.helper;
 
-import Interface.IDownloadProgressEvent;
+import Interface.IDownloaderEvent;
 import Manager.DownloaderManager;
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,8 +45,8 @@ public class HTMLDownloader {
      * @return
      * @throws Exception
      */
-    public static String downloadHTMLFile(String url, IDownloadProgressEvent component) throws Exception {
-        return downloadFile("htmlTasks", url, component);
+    public static String downloadHTMLFile(String[] urls, IDownloaderEvent component) throws Exception {
+        return downloadFile("htmlTasks", urls, component);
     }
 
     /**
@@ -57,13 +57,13 @@ public class HTMLDownloader {
      * @return
      * @throws Exception
      */
-    public static String downloadFile(String taskType, String url, IDownloadProgressEvent component) throws Exception {
-        if (taskType == null || (taskType != null && taskType.isEmpty()) || url == null || (url != null && url.isEmpty()) || component == null) {
+    public static String downloadFile(String taskType, String[] urls, IDownloaderEvent component) throws Exception {
+        if (taskType == null || (taskType != null && taskType.isEmpty()) || urls == null || (urls != null && urls.length > 0) || component == null) {
             throw new Exception("下载参数错误!");
         } else {
             //DownloaderManager.manager.clearAllDownloader();
             String taskName = taskType + "-" + new Date().getTime();
-            DownloaderManager.manager.createDownloader(taskName, url, "http", getBufferDir(), 0, 0, component);
+            DownloaderManager.manager.createDownloader(taskName, urls,"utf8", DownloaderManager.httpUrlList, getBufferDir(), 0, 0, component);
             DownloaderManager.manager.startDownloader(taskName);
             return taskName;
         }
