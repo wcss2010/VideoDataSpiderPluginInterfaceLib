@@ -58,7 +58,7 @@ public class HTMLDownloader {
      * @throws Exception
      */
     public static String downloadFile(String taskType, String[] urls, IDownloaderEvent component) throws Exception {
-        if (taskType == null || (taskType != null && taskType.isEmpty()) || urls == null || (urls != null && urls.length > 0) || component == null) {
+        if (taskType == null || (taskType != null && taskType.isEmpty()) || urls == null || (urls != null && urls.length <= 0) || component == null) {
             throw new Exception("下载参数错误!");
         } else {
             //DownloaderManager.manager.clearAllDownloader();
