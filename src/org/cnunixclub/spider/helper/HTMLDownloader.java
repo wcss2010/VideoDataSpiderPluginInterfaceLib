@@ -5,6 +5,7 @@
 package org.cnunixclub.spider.helper;
 
 import Interface.IDownloaderEvent;
+import Interface.IDownloaderPlugin;
 import Manager.DownloaderManager;
 import java.io.File;
 import java.io.FileInputStream;
@@ -63,7 +64,11 @@ public class HTMLDownloader {
         } else {
             //DownloaderManager.manager.clearAllDownloader();
             String taskName = taskType + "-" + new Date().getTime();
-            DownloaderManager.manager.createDownloader(taskName, urls,"utf8", DownloaderManager.httpUrlList, getBufferDir(), 0, 0, component);
+            IDownloaderPlugin plugin = DownloaderManager.manager.createDownloader(taskName, urls,"utf8", DownloaderManager.httpUrlList, getBufferDir(), 0, 0, component);
+            if (plugin != null)
+            {
+               plugin.SetEnabledQueryTotalSize(false);
+            }
             DownloaderManager.manager.startDownloader(taskName);
             return taskName;
         }
