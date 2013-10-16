@@ -22,6 +22,17 @@ import java.util.Date;
 public class HTMLDownloader {
 
     public static String defaultBufferDirName = "mediadataspider";
+    public static long downloaderCount = 0;
+    
+    /**
+     * 生成下载器序号
+     * @return 
+     */
+    public synchronized static long getDownloaderIndex()
+    {
+       downloaderCount++;
+       return downloaderCount;
+    }
 
     /**
      * 获取缓冲目录
@@ -61,9 +72,9 @@ public class HTMLDownloader {
     public static String downloadFile(String taskType, String[] urls, IDownloaderEvent component) throws Exception {
         if (taskType == null || (taskType != null && taskType.isEmpty()) || urls == null || (urls != null && urls.length <= 0) || component == null) {
             throw new Exception("下载参数错误!");
-        } else {
-            //DownloaderManager.manager.clearAllDownloader();
-            String taskName = taskType + "-" + new Date().getTime();
+        } else 
+        {
+            String taskName = taskType + "-" + getDownloaderIndex();
             IDownloaderPlugin plugin = DownloaderManager.manager.createDownloader(taskName, urls,"utf8", DownloaderManager.httpUrlList, getBufferDir(), 0, 0, component);
             if (plugin != null)
             {
